@@ -19,7 +19,8 @@
 
 ### The ulterior motives...
 
-1. Inspire interest in Pry and friends
+1. Inspire interest in Pry & friends
+1. Demo a few capabilities (including in Rails)
 1. Acquire audience feedback on future direction of this talk
 
 ## Feedback!
@@ -432,5 +433,69 @@ Feel free to ask questions:
 
 Note: taking the time to really learn how a debugger works often changes
 one's opinions of debuggers.
+
+# rails g scaffold Meal name:string calories:integer stars:integer
+
+
+~~~~
+@@@sh
+$ rails g scaffold Meal name:string calories:integer stars:integer
+      invoke  active_record
+      create    db/migrate/20120619223213_create_meals.rb
+      create    app/models/meal.rb
+      invoke    test_unit
+      create      test/unit/meal_test.rb
+      create      test/fixtures/meals.yml
+      invoke  resource_route
+       route    resources :meals
+      invoke  scaffold_controller
+      create    app/controllers/meals_controller.rb
+      invoke    erb
+      create      app/views/meals
+      create      app/views/meals/index.html.erb
+      create      app/views/meals/edit.html.erb
+      create      app/views/meals/show.html.erb
+      create      app/views/meals/new.html.erb
+      create      app/views/meals/_form.html.erb
+      invoke    test_unit
+      create      test/functional/meals_controller_test.rb
+      invoke    helper
+      create      app/helpers/meals_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/meals_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/meals.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/meals.css.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.css.scss
+15:32:13 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
+ruby-1.9.3-p194@working 
+$ 
+~~~~
+
+# Don't forget to migrate
+
+~~~~
+@@@shell
+15:36:16 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
+ruby-1.9.3-p194@working 
+$ rake db:migrate; rake db:test:prepare
+==  CreateMeals: migrating
+====================================================
+-- create_table(:meals)
+   -> 0.0013s
+==  CreateMeals: migrated (0.0014s)
+===========================================
+
+15:36:33 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
+ruby-1.9.3-p194@working 
+$ 
+~~~~
+
+
+# Pry it open
+
 
 
