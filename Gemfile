@@ -5,7 +5,7 @@ gem "deckrb"
 gem 'pry'
 gem 'pry-nav'
 gem 'pry-doc'
+gem 'pry-debugger'
 gem 'pry-stack_explorer'
 gem 'pry-exception_explorer'
-
 
