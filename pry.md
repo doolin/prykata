@@ -1,16 +1,64 @@
-# A short excursion into Pry
+<h1 style="text-align: center">Dancing with Rails</h1>
+
+
+<img src="http://pry.github.com/images/pry_logo.png">
+
+<h3 style="text-align: center">An adventure in single stepping starring Pry</h3> 
+
+# Before we get started...
+
+### Who is coding Rails every day?
+
+### Who is using Pry every day?
+
+### Who uses Ruby debugger regularly?
+
+
+
+# Purpose of presentation
+
+### The ulterior motives...
+
+1. Inspire interest in Pry and friends
+1. Acquire audience feedback on future direction of this talk
+
+## Feedback!
+
+Stuff to think about during talk:
+
+* Debugging and debuggers
+* Ruby internals
+* REPL
+
+We'll revisit these notions at the end.
+
+# Some back story
+
+This presentation was intended to be a "code kata" for personal use.
+
+Then, it turned into a Pry demo.
+
+Now, it's still under development and (sort of) aimed at working with Rails apps.
+
+[Get the code on github](https://github.com/doolin/prykata),
+or follow along there.
+
+### I am open to pull requests
+
 
 # Why Pry?
 
-The Ruby ecosystem lacks one major feature which is present in the same
-class of languages: the REPL.
+The Ruby ecosystem is weak with respect to major
+feature which is present in the same
+class of languages: a full-featured REPL.
 
-REPL is `read-eval-print-loop`.
+**REPL means `read-eval-print-loop`.**
 
 When you fire up Scheme, Lisp or Smalltalk consoles, what you get is the
 REPL.
 
-Pry is a first step in implementing REPL for Ruby.
+Pry is a next step in implementing a powerful REPL for Ruby
+development.
 
 ## Two primary uses for Pry
 
@@ -32,6 +80,7 @@ Pry makes Irb a lot better.
 >bring your code to a REPL session (as with IRB) you instead bring a
 >REPL session to your code... [John
 >Mair](http://banisterfiend.wordpress.com/2011/01/27/turning-irb-on-its-head-with-pry/).
+
 
 # REPL read-eval-print-loop
 
@@ -89,7 +138,8 @@ FOO
 * (quit)
 ~~~~
 
-# Feature of Pry
+
+# Features of Pry
 
 * Source code browsing (including core C source with the pry-doc gem)
 * Navigation around state (cd, ls and friends)
@@ -107,6 +157,141 @@ FOO
 * Many convenience commands inspired by IPython, Smalltalk and other
 advanced REPLs
 
+
+### That's a lot of features
+
+(We're not going to look at all of them.)
+
+# The Pry ecosystem
+
+As noted at the beginning, Pry is being used as an alternative to
+`ruby-debug`. Since Pry doesn't have explicit support for standard
+debugging operations such as `step`, `continue`, etc., we look to
+Rubygems and find:
+
+* `pry-nav`
+* `pry-doc` 
+* `pry-rails` 
+* `pry-debugger`
+* `pry-stack_explorer`
+* `pry-exception_explorer`
+  
+There are more, this will for now, see the links at the end of this
+presentation.
+
+### The Pry ecosystem is expanding rapidly
+
+# Get started - Pry in your Gemfile
+
+~~~~
+@@@ruby
+source 'http://rubygems.org'
+gem 'pry'
+gem 'pry-nav'
+gem 'pry-doc'
+gem 'pry-stack_explorer'
+gem 'pry-exception_explorer'
+~~~~
+
+# Python documentation coolness
+
+Python has this cool feature in the interpreter which returns a little
+documentation about the object and method, when invoked without
+parentheses:
+
+~~~~
+@@@ python
+>>> file.read
+<built-in method read of file object at 0x1004c38b0>
+>>> file.read()
+'This is the contents of the file'
+~~~~
+
+## Now with pry-doc
+
+~~~~
+@@@ruby
+[5] pry(FileUtils):1> show-doc rm
+~~~~
+
+# show-doc rm
+
+~~~~
+@@@ruby 
+[5] pry(FileUtils):1> show-doc rm
+
+From:
+/Users/daviddoolin/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/fileutils.rb
+@ line 556:
+Number of lines: 9
+Owner: FileUtils
+Visibility: private
+Signature: rm(list, options=?)
+
+Options: force noop verbose
+
+Remove file(s) specified in list.  This method cannot remove
+directories.
+All StandardErrors are ignored when the :force option is set.
+
+  FileUtils.rm %w( junk.txt dust.txt )
+  FileUtils.rm Dir.glob(' * .so')
+  FileUtils.rm 'NotExistFile', :force => true   # never raises exception
+
+[6] pry(FileUtils):1>
+~~~~
+
+# show-method rm
+
+~~~~
+@@@ruby
+[7] pry(FileUtils):1> show-method rm
+
+From:
+/Users/daviddoolin/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/fileutils.rb
+@ line 556:
+Number of lines: 10
+Owner: FileUtils
+Visibility: private
+
+def rm(list, options = {})
+  fu_check_options options, OPT_TABLE['rm']
+  list = fu_list(list)
+  fu_output_message "rm#{options[:force] ? ' -f' : ''} #{list.join ' '}"
+if options[:verbose]
+  return if options[:noop]
+
+  list.each do |path|
+    remove_file path, options[:force]
+  end
+end
+[8] pry(FileUtils):1>
+~~~~
+
+
+
+# Defining a method in Pry
+
+Fire up a terminal window, let's write a Ruby "macro" 
+
+~~~~
+@@@ruby
+$ pry 
+[1] pry(main)> def foo
+[1] pry(main)*   'bar'
+[1] pry(main)* end  
+=> nil
+[2] pry(main)> foo
+=> "bar"
+[3] pry(main)>
+~~~~
+
+
+Method indentation is handled very nicely, better than Irb.
+
+Notice syntax highlighting as well.
+
+### Elegant tools make coding fun
 
 # Lingering in the Kernel...
 
@@ -127,7 +312,7 @@ captures the Pry experience well. Here's what she found...
 
 `[2] pry(String)> cd String`
 
-`[3] pry(String)> ls` “I don’t see much, other than some… locals.”
+`[3] pry(String)> ls` 
 
 “Yes. Now, try creating an instance of a String.”
 
@@ -162,73 +347,60 @@ locals: _  _dir_  _ex_  _file_  _in_  _out_  _pry_
 
 That's cool.
 
-# Investigation: Ruby macros
-
-What are these things, macros? 
-
-Can Pry help us understand?
-
-# Comparison with ruby-debug
-
-`ruby-debug` is pretty useful, provided it's properly employed.
-
-
-Note: taking the time to really learn how a debugger works often changes
-one's opinions of debuggers.
-
-
-# The Pry ecosystem
-
-
-As noted at the beginning, Pry is being used as an alernative to
-`ruby-debug`. Since Pry doesn't have explicit support for standard
-debugging operations such as `step`, `continue`, etc., we look to
-Rubygems and find:
-
-* `pry-nav`: 
-* `pry-stack_explorer`:
-* `pry-exception_explorer`:
-  
-There are more, this will for now, see the links at the end of this
-presentation.
-
 # pry-nav
 
-`pry-nav` is a muct have when using Pry as a debugger. It adds following
+`pry-nav` is a must have when using Pry as a debugger. It adds following
 commands:
 
+* `continue`
+* `step`
+* `next`
 
 
-# pry-stack_explorer
+# Pry open Rails
 
-Navigate the call stack with `pry-stack_explorer`.
+Now that we've set the stage, there are 2 ways Pry is useful in Rails:
 
-# pry-exception_explorer
+### 1. As a better `rails console`
 
-Intercept exceptions with `pry-exception_explorer`.
+### 2. As a drop-in for stepping code with pry-nav
 
-Let's try an example...
 
-~~~~
-@@@ ruby
-a = 1/0
-~~~~
+# A better rails console
 
-# Python documentation coolness
-
-Python has this cool feature in the interpreter which returns a little
-documentation about the object and method, when invoked without
-parentheses:
+Stick this in your Gemfile (if you haven't already):
 
 ~~~~
-@@@ python
->>> file.read
-<built-in method read of file object at 0x1004c38b0>
->>> file.read()
-'This is the contents of the file'
+@@@ruby
+group :development do
+  ...
+  gem 'pry-rails'
+  ...
+end
 ~~~~
 
-## Now with pry-doc
+# binding.pry for great good
+
+Add `binding.pry` anywhere in your Rails execution path, refresh.
+
+You will dumped into the Rails session.
+
+### This can be phenomenally useful
+
+
+# Feedback!
+
+Recall from start, some questions:
+
+### REPL: Does Pry make sense *to you* as a Ruby REPL?
+
+### Debugging and debuggers
+
+### Ruby internals: instant access, useful or not?
+
+There are no "right" answers to these questions, only answers which make
+sense to your work flow.
+
 
 # Links 
 You might find these links useful:
@@ -244,7 +416,21 @@ You might find these links useful:
   ecosystem](http://banisterfiend.wordpress.com/2012/02/14/the-pry-ecosystem/)
 * [Debugging with
   Pry](http://yorickpeterse.com/articles/debugging-with-pry)
-Thanks for reading or listening along. Feel free to ask questions:
+* [Pry-doc](https://github.com/pry/pry-doc)
+* [The pry-debugger](https://github.com/nixme/pry-debugger)
+
+Thanks for reading or listening along.
+
+Feel free to ask questions:
 [@doolin](http://twitter.com/doolin).
+
+# That's enough for now.
+
+# Comparison with ruby-debug
+
+`ruby-debug` is pretty useful, provided it's properly employed.
+
+Note: taking the time to really learn how a debugger works often changes
+one's opinions of debuggers.
 
 
