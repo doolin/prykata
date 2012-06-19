@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'thin'
 gem "deckrb"
 gem 'pry'
 gem 'pry-nav'
