@@ -8,11 +8,22 @@
 # Before we get started...
 
 ### Who is coding Rails every day?
-
-### Who is using Pry every day?
+(lucky stiffs)
 
 ### Who uses Ruby debugger regularly?
 
+
+### Who is using Pry every day?
+
+
+# More nosy questions
+
+### Who has watched the Pry Railscast?
+
+### If you watched the Railscast, did you type-along?
+
+
+This presentation is partly a type-along.
 
 
 # Purpose of presentation
@@ -23,7 +34,7 @@
 1. Demo a few capabilities (including in Rails)
 1. Acquire audience feedback on future direction of this talk
 
-## Feedback!
+# Feedback!
 
 Stuff to think about during talk:
 
@@ -61,16 +72,9 @@ REPL.
 Pry is a next step in implementing a powerful REPL for Ruby
 development.
 
-## Two primary uses for Pry
-
-* A *better* Irb
-* An alternative debugger
-
-### No more "puts-driven development"
-
 # But Irb is a REPL...?
 
-Actually, yes, technically Irb is a REPL.
+Actually, yes, technically Irb is a REPL (in opinion).
 
 And it's not bad, especially when attached to large applications like
 Rails.
@@ -140,6 +144,77 @@ FOO
 ~~~~
 
 
+# Two primary uses for Pry
+
+* A *better* Irb
+* An alternative debugger
+
+### No more "puts-driven development"
+
+Let's take a quick look.
+
+# A quick look at Pry
+
+* Find a terminal
+* `gem install pry`
+* `$ pry`
+
+# Lingering in the Kernel...
+
+[Sae
+Romy Hong](http://syntacticsugar.github.com/blog/2012/02/23/lingering-in-the-kernel/)
+captures the Pry experience well. Here's what she found...
+
+
+“Navigate into the kernel.”
+
+`[0] pry(main)> cd Kernel`
+
+“Look around you, do you see anything?”
+
+`[1] pry(Kernel)> ls` “Ah, glorious. We have our Kernel methods…”
+
+“Yes. Navigate into String and look around.”
+
+`[2] pry(String)> cd String`
+
+`[3] pry(String)> ls` 
+
+“Yes. Now, try creating an instance of a String.”
+
+`[4] pry(String)> x = "wombat"`
+
+“Navigate into that instance, look around.”
+
+`[5] pry("wombat")> cd x`
+
+`[6] pry("wombat")> ls`
+
+“Tell me, what do you see?”
+
+----
+
+([Visit
+Romy](http://syntacticsugar.github.com/blog/2012/02/23/lingering-in-the-kernel/).)
+
+
+# [6] pry("wombat")> ls
+
+This is what I see:
+
+~~~~
+@@@ ruby
+Comparable#methods: <  <=  >  >=  between?
+String#methods: %  *  +  <<  <=>  ==  ===  =~  []  []=  ascii_only?  bytes  bytesize  byteslice  capitalize  capitalize!  casecmp  center chars  chomp  chomp!  chop  chop!  chr  clear  codepoints  concat  count crypt  delete  delete!  downcase  downcase!  dump  each_byte  each_char each_codepoint  each_line  empty?  encode  encode!  encoding  end_with?  eql?  force_encoding  getbyte  gsub  gsub!  hash  hex  include?  index insert  inspect  intern  length  lines  ljust  lstrip  lstrip!  match next  next!  oct  ord  partition  prepend  replace  reverse  reverse!  rindex  rjust  rpartition  rstrip  rstrip!  scan  setbyte  shellescape shellsplit  size  slice  slice!  split  squeeze  squeeze!  start_with?  strip  strip!  sub  sub!  succ  succ!  sum  swapcase  swapcase!  to_c to_f  to_i  to_r  to_s  to_str  to_sym  tr  tr!  tr_s  tr_s!  unpack upcase  upcase!  upto  valid_encoding?  
+self.methods: __binding_impl__
+locals: _  _dir_  _ex_  _file_  _in_  _out_  _pry_
+[7] pry("wombat"):1> 
+~~~~
+
+That's cool.
+
+
+
 # Features of Pry
 
 * Source code browsing (including core C source with the pry-doc gem)
@@ -177,7 +252,7 @@ Rubygems and find:
 * `pry-stack_explorer`
 * `pry-exception_explorer`
   
-There are more, this will for now, see the links at the end of this
+There are more, this will be enough for now, see the links at the end of this
 presentation.
 
 ### The Pry ecosystem is expanding rapidly
@@ -294,60 +369,6 @@ Notice syntax highlighting as well.
 
 ### Elegant tools make coding fun
 
-# Lingering in the Kernel...
-
-[Sae
-Romy Hong](http://syntacticsugar.github.com/blog/2012/02/23/lingering-in-the-kernel/)
-captures the Pry experience well. Here's what she found...
-
-
-“Navigate into the kernel.”
-
-`[0] pry(main)> cd Kernel`
-
-“Look around you, do you see anything?”
-
-`[1] pry(Kernel)> ls` “Ah, glorious. We have our Kernel methods…”
-
-“Yes. Navigate into String and look around.”
-
-`[2] pry(String)> cd String`
-
-`[3] pry(String)> ls` 
-
-“Yes. Now, try creating an instance of a String.”
-
-`[4] pry(String)> x = "wombat"`
-
-“Navigate into that instance, look around.”
-
-`[5] pry("wombat")> cd x`
-
-`[6] pry("wombat")> ls`
-
-“Tell me, what do you see?”
-
-----
-
-([Visit
-Romy](http://syntacticsugar.github.com/blog/2012/02/23/lingering-in-the-kernel/).)
-
-
-# [6] pry("wombat")> ls
-
-This is what I see:
-
-~~~~
-@@@ ruby
-Comparable#methods: <  <=  >  >=  between?
-String#methods: %  *  +  <<  <=>  ==  ===  =~  []  []=  ascii_only?  bytes  bytesize  byteslice  capitalize  capitalize!  casecmp  center chars  chomp  chomp!  chop  chop!  chr  clear  codepoints  concat  count crypt  delete  delete!  downcase  downcase!  dump  each_byte  each_char each_codepoint  each_line  empty?  encode  encode!  encoding  end_with?  eql?  force_encoding  getbyte  gsub  gsub!  hash  hex  include?  index insert  inspect  intern  length  lines  ljust  lstrip  lstrip!  match next  next!  oct  ord  partition  prepend  replace  reverse  reverse!  rindex  rjust  rpartition  rstrip  rstrip!  scan  setbyte  shellescape shellsplit  size  slice  slice!  split  squeeze  squeeze!  start_with?  strip  strip!  sub  sub!  succ  succ!  sum  swapcase  swapcase!  to_c to_f  to_i  to_r  to_s  to_str  to_sym  tr  tr!  tr_s  tr_s!  unpack upcase  upcase!  upto  valid_encoding?  
-self.methods: __binding_impl__
-locals: _  _dir_  _ex_  _file_  _in_  _out_  _pry_
-[7] pry("wombat"):1> 
-~~~~
-
-That's cool.
-
 # pry-nav
 
 `pry-nav` is a must have when using Pry as a debugger. It adds following
@@ -360,12 +381,16 @@ commands:
 
 # Pry open Rails
 
-Now that we've set the stage, there are 2 ways Pry is useful in Rails:
+Now that we've set the stage, here are two ways Pry is useful in Rails:
 
 ### 1. As a better `rails console`
 
 ### 2. As a drop-in for stepping code with pry-nav
 
+
+# Install a temporary Rails application
+
+Add Pry & friends to Gemfile
 
 # A better rails console
 
@@ -380,14 +405,181 @@ group :development do
 end
 ~~~~
 
-# binding.pry for great good
+### Don't forget to bundle install
+
+# rails g scaffold Meal name:string calories:integer stars:integer
+
+
+~~~~
+@@@sh
+$ rails g scaffold Meal name:string calories:integer stars:integer
+      invoke  active_record
+      create    db/migrate/20120619223213_create_meals.rb
+      create    app/models/meal.rb
+      invoke    test_unit
+      create      test/unit/meal_test.rb
+      create      test/fixtures/meals.yml
+      invoke  resource_route
+       route    resources :meals
+      invoke  scaffold_controller
+      create    app/controllers/meals_controller.rb
+      invoke    erb
+      create      app/views/meals
+      create      app/views/meals/index.html.erb
+      create      app/views/meals/edit.html.erb
+      create      app/views/meals/show.html.erb
+      create      app/views/meals/new.html.erb
+      create      app/views/meals/_form.html.erb
+      invoke    test_unit
+      create      test/functional/meals_controller_test.rb
+      invoke    helper
+      create      app/helpers/meals_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/meals_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/meals.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/meals.css.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.css.scss
+15:32:13 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
+ruby-1.9.3-p194@working 
+$ 
+~~~~
+
+# Don't forget to migrate
+
+
+~~~~~
+@@@sh
+15:36:16 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
+ruby-1.9.3-p194@working 
+$ rake db:migrate; rake db:test:prepare
+ == CreateMeals: migrating
+ ====================================================
+-- create_table(:meals)
+   -> 0.0013s
+ == CreateMeals: migrated (0.0014s)
+ ==========================================
+
+15:36:33 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
+ruby-1.9.3-p194@working 
+$ 
+~~~~~
+
+
+# Pry it open
+
+### binding.pry for great good
 
 Add `binding.pry` anywhere in your Rails execution path, refresh.
 
-You will dumped into the Rails session.
+Let's try in the `MealsController`, Line 43:
+
+~~~~
+@@@ruby
+40   # POST /meals
+41   # POST /meals.json
+42   def create
+43     binding.pry
+44     @meal = Meal.new(params[:meal])
+45     
+...
+~~~~
+
+When creating a new meal, Pry will dump into the Rails session.
 
 ### This can be phenomenally useful
 
+# Start your Rails server
+
+Need help?
+
+Raise hand!
+
+## http://localhost:3000/meals
+
+# Create a new Meal
+
+Fill in the blanks.
+
+Press `Create Meal`.
+
+# Uh oh, the page is hung...
+
+### Because Pry is at work
+
+
+~~~~
+@@@ruby
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-06-19 18:31:44 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+[2012-06-19 18:31:44] WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
+
+From: /Users/daviddoolin/tmp/prydemo/app/controllers/meals_controller.rb @ line 42 MealsController#create:
+
+    42:   def create
+ => 43:     binding.pry
+    44:     @meal = Meal.new(params[:meal])
+    45: 
+    46:     respond_to do |format|
+    47:       if @meal.save
+    48:         format.html { redirect_to @meal, notice: 'Meal was successfully created.' }
+    49:         format.json { render json: @meal, status: :created, location: @meal }
+    50:       else
+    51:         format.html { render action: "new" }
+    52:         format.json { render json: @meal.errors, status: :unprocessable_entity }
+    53:       end
+    54:     end
+    55:   end
+
+[1] pry(#<MealsController>)> 
+~~~~
+
+
+# Let's do some single stepping
+
+~~~~
+@@@ruby
+ # move cursor to @meal = Meal.new(params[:meal])
+[1] pry(#<MealsController>)> next 
+ # step into @meal = Meal.new(params[:meal])
+[1] pry(#<MealsController>)> step
+
+From: /Users/daviddoolin/.rvm/gems/ruby-1.9.3-p194@working/gems/actionpack-3.2.6/lib/action_controller/metal.rb @ line 143 ActionController::Metal#params:
+
+    143:     def params
+ => 144:       @_params ||= request.parameters
+    145:     end
+~~~~
+
+# What's on our plate?
+
+Let's ask Pry what it's seeing:
+
+~~~~
+@@@ruby
+[1] pry(#<MealsController>)> ls
+...
+(Boatload of information scrolls by...)
+...
+[2] pry(#<MealsController>)> puts @_params
+{"utf8"=>"✓", "authenticity_token"=>"Sv9OyAEsrmNjgGaQGvzG9/1ifSGVIPUICfpZXi5oyc0=", "meal"=>{"name"=>"Noodles", "calories"=>"14", "stars"=>"1"}, "commit"=>"Create Meal", "action"=>"create", "controller"=>"meals"}
+=> nil
+~~~~
+
+# Ok, nice, this is nice, but I want my meal
+
+
+Works just like everyone's favorite debugger (`gdb`):
+
+~~~~
+@@@ruby
+[3] pry(#<MealsController>)> continue
+~~~~
+
+### Now check your Rails app
 
 # Feedback!
 
@@ -434,68 +626,5 @@ Feel free to ask questions:
 Note: taking the time to really learn how a debugger works often changes
 one's opinions of debuggers.
 
-# rails g scaffold Meal name:string calories:integer stars:integer
 
-
-~~~~
-@@@sh
-$ rails g scaffold Meal name:string calories:integer stars:integer
-      invoke  active_record
-      create    db/migrate/20120619223213_create_meals.rb
-      create    app/models/meal.rb
-      invoke    test_unit
-      create      test/unit/meal_test.rb
-      create      test/fixtures/meals.yml
-      invoke  resource_route
-       route    resources :meals
-      invoke  scaffold_controller
-      create    app/controllers/meals_controller.rb
-      invoke    erb
-      create      app/views/meals
-      create      app/views/meals/index.html.erb
-      create      app/views/meals/edit.html.erb
-      create      app/views/meals/show.html.erb
-      create      app/views/meals/new.html.erb
-      create      app/views/meals/_form.html.erb
-      invoke    test_unit
-      create      test/functional/meals_controller_test.rb
-      invoke    helper
-      create      app/helpers/meals_helper.rb
-      invoke      test_unit
-      create        test/unit/helpers/meals_helper_test.rb
-      invoke  assets
-      invoke    coffee
-      create      app/assets/javascripts/meals.js.coffee
-      invoke    scss
-      create      app/assets/stylesheets/meals.css.scss
-      invoke  scss
-      create    app/assets/stylesheets/scaffolds.css.scss
-15:32:13 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
-ruby-1.9.3-p194@working 
-$ 
-~~~~
-
-# Don't forget to migrate
-
-~~~~
-@@@shell
-15:36:16 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
-ruby-1.9.3-p194@working 
-$ rake db:migrate; rake db:test:prepare
-==  CreateMeals: migrating
-====================================================
--- create_table(:meals)
-   -> 0.0013s
-==  CreateMeals: migrated (0.0014s)
-===========================================
-
-15:36:33 daviddoolin@David-Doolins-MacBook-Pro:~/tmp/prydemo
-ruby-1.9.3-p194@working 
-$ 
-~~~~
-
-
-# Pry it open
-
-
-
+# david.doolin@gmail.com
