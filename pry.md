@@ -172,7 +172,9 @@ captures the Pry experience well. Here's what she found...
 
 “Look around you, do you see anything?”
 
-`[1] pry(Kernel)> ls` “Ah, glorious. We have our Kernel methods…”
+`[1] pry(Kernel)> ls` 
+
+“Ah, glorious. We have our Kernel methods…”
 
 “Yes. Navigate into String and look around.”
 
@@ -216,6 +218,9 @@ That's cool.
 
 
 # Features of Pry
+
+From the 
+[Pry website](http://pry.github.com/):
 
 * Source code browsing (including core C source with the pry-doc gem)
 * Navigation around state (cd, ls and friends)
@@ -262,11 +267,16 @@ presentation.
 ~~~~
 @@@ruby
 source 'http://rubygems.org'
-gem 'pry'
-gem 'pry-nav'
-gem 'pry-doc'
-gem 'pry-stack_explorer'
-gem 'pry-exception_explorer'
+...
+group :development do
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  #gem 'pry-stack_explorer'
+  #gem 'pry-exception_explorer'
+end
+...
 ~~~~
 
 # Python documentation coolness
@@ -287,6 +297,7 @@ parentheses:
 
 ~~~~
 @@@ruby
+[4] pry(main):1> cd FileUtils
 [5] pry(FileUtils):1> show-doc rm
 ~~~~
 
