@@ -1,65 +1,58 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    binding_of_caller (0.6.7)
-    coderay (1.0.6)
-    columnize (0.3.6)
-    daemons (1.1.8)
-    debugger (1.1.4)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.3)
-    debugger-linecache (1.1.1)
-      debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.3)
-    deckrb (0.3.1)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    coderay (1.1.0)
+    daemons (1.2.2)
+    debug_inspector (0.0.2)
+    deckrb (0.5.2)
       coderay
-      erector (>= 0.9.0.pre1)
+      erector (>= 0.9.0)
       json
       nokogiri
-      rack
+      rack (>= 1.4.1)
       rack-codehighlighter
       redcarpet (~> 2)
+      thin
       trollop
-    erector (0.9.0.pre1)
+    erector (0.10.0)
       treetop (>= 1.2.3)
-    eventmachine (0.12.10)
-    json (1.7.3)
-    method_source (0.7.1)
-    nokogiri (1.5.4)
-    polyglot (0.3.3)
-    pry (0.9.9.6)
-      coderay (~> 1.0.5)
-      method_source (~> 0.7.1)
-      slop (>= 2.4.4, < 3)
-    pry-debugger (0.2.0)
-      debugger (~> 1.1.3)
-      pry (~> 0.9.9)
-    pry-doc (0.4.2)
-      pry (>= 0.9.0)
-      yard (~> 0.8.1)
-    pry-exception_explorer (0.1.9)
-      pry-stack_explorer (>= 0.3.9)
-    pry-nav (0.2.1)
-      pry (~> 0.9.9)
-    pry-stack_explorer (0.4.2)
-      binding_of_caller (~> 0.6.2)
-      pry (~> 0.9.9)
-    rack (1.4.1)
+    eventmachine (1.0.7)
+    json (1.8.2)
+    method_source (0.8.2)
+    mini_portile (0.6.2)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
+    polyglot (0.3.5)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-doc (0.6.0)
+      pry (~> 0.9)
+      yard (~> 0.8)
+    pry-exception_explorer (0.2.3)
+      pry-stack_explorer (>= 0.4.6)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
+    rack (1.6.0)
     rack-codehighlighter (0.5.0)
       nokogiri (>= 1.4.1)
       rack (>= 1.0.0)
-    redcarpet (2.1.1)
-    slop (2.4.4)
-    thin (1.3.1)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
-    treetop (1.4.10)
-      polyglot
-      polyglot (>= 0.3.1)
-    trollop (1.16.2)
-    yard (0.8.2.1)
+    redcarpet (2.3.0)
+    slop (3.6.0)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
+    treetop (1.6.2)
+      polyglot (~> 0.3)
+    trollop (2.1.2)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -67,7 +60,6 @@ PLATFORMS
 DEPENDENCIES
   deckrb
   pry
-  pry-debugger
   pry-doc
   pry-exception_explorer
   pry-nav
